@@ -29,3 +29,4 @@ scores = [[random.randrange(60, 101) for _ in range(3)] for _ in range(5)]
 print(scores)
 ```
 - 上面的代码[random.randrange(60, 101) for _ in range(3)] 可以产生由3个随机整数构成的列表，我们把这段代码又放在了另一个列表生成式中作为列表的元素，这样的元素一共生成5个，最终得到了一个嵌套列表。
+- 代码for循环中的range中的3是说代码循环3次不是范围从0到3
