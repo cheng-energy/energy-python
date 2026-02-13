@@ -30,3 +30,12 @@ print(scores)
 ```
 - 上面的代码[random.randrange(60, 101) for _ in range(3)] 可以产生由3个随机整数构成的列表，我们把这段代码又放在了另一个列表生成式中作为列表的元素，这样的元素一共生成5个，最终得到了一个嵌套列表。
 - 代码for循环中的range中的3是说代码循环3次不是范围从0到3
+---
+# random库的学习
+- 建议直接在标准库里面看不常用的
+- 常用的：
+- randim.random()随机生成0到1之间的浮点数
+- random.randint(a,b)生成从a到b的随机整数（左右都是闭区间）
+- random.randrange(a,b,c)生成从a到b的随机整数（左右都是闭区间,c是步长）
+- random.choice(sequence)从sequence中随机抽取一个元素，sequence可以是列表，元组等
+- random.shuffle(sequence)随机打乱列表的顺序，原列表发生变化
