@@ -85,3 +85,120 @@ print(t1 == t3)            # False
 print(t1 >= t3)            # False
 print(t1 <= (35, 11, 99))  # False
 ```
+- 如果一个元组中只有一个元素，需要加上一个逗号，否则就不是元组，知识改变代码优先级的括号
+### 打包和解包的操作
+- 当我们把多个用逗号分隔的值赋给一个变量时，多个值会打包成一个元组类型；当我们把一个元组赋值给多个变量时，元组会解包成多个值然后分别赋给对应的变量
+```python
+# 打包操作
+a = 1, 10, 100
+print(type(a))  # <class 'tuple'>
+print(a)        # (1, 10, 100)
+# 解包操作
+i, j, k = a
+print(i, j, k)  # 1 10 100
+```
+- 解包时，如果解包元素个数和变量个数不一样会报错
+- 使用星号表达式可以解决上面问题，可以让一个变量接收多个值
+```python
+a = 1, 10, 100, 1000
+i, j, *k = a
+print(i, j, k)        # 1 10 [100, 1000]
+i, *j, k = a
+print(i, j, k)        # 1 [10, 100] 1000
+*i, j, k = a
+print(i, j, k)        # [1, 10] 100 1000
+*i, j = a
+print(i, j)           # [1, 10, 100] 1000
+i, *j = a
+print(i, j)           # 1 [10, 100, 1000]
+i, j, k, *l = a
+print(i, j, k, l)     # 1 10 100 [1000]
+i, j, k, l, *m = a
+print(i, j, k, l, m)  # 1 10 100 1000 []
+```
+- 需要注意两点：首先，用星号表达式修饰的变量会变成一个列表，列表中有0个或多个元素；其次，在解包语法中，星号表达式只能出现一次。
+- 解包语法对所有的序列都成立，这就意味着我们之前讲的列表、range函数构造的范围序列甚至字符串都可以使用解包语法
+---
+## 集合（set）
+- 使用{}创建，其中必须有一个元素，否则不是集合而是一个空字典，里面元素必须是可哈希的，即可变类型不可放入集合，例如列表，集合都不可以放入集合。使用无法创建嵌套集合
+- 集合有无序性，所以不可以使用索引进行遍历
+### 集合的运算
+```python
+set1 = {1, 2, 3, 4, 5, 6, 7}
+set2 = {2, 4, 6, 8, 10}
+
+# 交集
+print(set1 & set2)                      # {2, 4, 6}
+print(set1.intersection(set2))          # {2, 4, 6}
+
+# 并集
+print(set1 | set2)                      # {1, 2, 3, 4, 5, 6, 7, 8, 10}
+print(set1.union(set2))                 # {1, 2, 3, 4, 5, 6, 7, 8, 10}
+
+# 差集
+print(set1 - set2)                      # {1, 3, 5, 7}
+print(set1.difference(set2))            # {1, 3, 5, 7}
+
+# 对称差
+print(set1 ^ set2)                      # {1, 3, 5, 7, 8, 10}
+print(set1.symmetric_difference(set2))  # {1, 3, 5, 7, 8, 10}
+```
+- 还可以使用！=和==判断集合是否相等，<和>等符号来判断子集等
+### 集合的方法
+```python
+set1 = {1, 10, 100}
+
+# 添加元素
+set1.add(1000)
+set1.add(10000)
+print(set1)  # {1, 100, 1000, 10, 10000}
+
+# 删除元素
+set1.discard(10)
+if 100 in set1:
+    set1.remove(100)
+print(set1)  # {1, 1000, 10000}
+
+# 清空元素
+set1.clear()
+print(set1)  # set()
+```
+- 因为remove在元素不存在时会报错，所以先判断元素是否存在
+- 集合类型还有一个名为isdisjoint的方法可以判断两个集合有没有相同的元素，如果没有相同元素，该方法返回True，否则该方法返回False，代码如下所示。
+```python
+set1 = {'Java', 'Python', 'C++', 'Kotlin'}
+set2 = {'Kotlin', 'Swift', 'Java', 'Dart'}
+set3 = {'HTML', 'CSS', 'JavaScript'}
+print(set1.isdisjoint(set2))  # False
+print(set1.isdisjoint(set3))  # True
+```
+- python 中还有一种不可变类型的集合，名字叫frozenset。set跟frozenset的区别就如同list跟tuple的区别，frozenset由于是不可变类型，能够计算出哈希码，因此它可以作为set中的元素。除了不能添加和删除元素，frozenset在其他方面跟set是一样的，下面的代码简单的展示了frozenset的用法
+```python
+fset1 = frozenset({1, 3, 5, 7})
+fset2 = frozenset(range(1, 6))
+print(fset1)          # frozenset({1, 3, 5, 7})
+print(fset2)          # frozenset({1, 2, 3, 4, 5})
+print(fset1 & fset2)  # frozenset({1, 3, 5})
+print(fset1 | fset2)  # frozenset({1, 2, 3, 4, 5, 7})
+print(fset1 - fset2)  # frozenset({7})
+print(fset1 < fset2)  # False
+```
+## 字典
+### 字典的创建
+- 一种就是直接{}写
+- 另一种就是
+```python
+# dict函数(构造器)中的每一组参数就是字典中的一组键值对
+person = dict(name='王大锤', age=55, height=168, weight=60, addr='成都市武侯区科华北路62号1栋101')
+print(person)  # {'name': '王大锤', 'age': 55, 'height': 168, 'weight': 60, 'addr': '成都市武侯区科华北路62号1栋101'}
+
+# 可以通过Python内置函数zip压缩两个序列并创建字典
+items1 = dict(zip('ABCDE', '12345'))
+print(items1)  # {'A': '1', 'B': '2', 'C': '3', 'D': '4', 'E': '5'}
+items2 = dict(zip('ABCDE', range(1, 10)))
+print(items2)  # {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5}
+
+# 用字典生成式语法创建字典
+items3 = {x: x ** 3 for x in range(1, 6)}
+print(items3)  # {1: 1, 2: 8, 3: 27, 4: 64, 5: 125}
+```
