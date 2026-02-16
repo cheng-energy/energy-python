@@ -202,3 +202,44 @@ print(items2)  # {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5}
 items3 = {x: x ** 3 for x in range(1, 6)}
 print(items3)  # {1: 1, 2: 8, 3: 27, 4: 64, 5: 125}
 ```
+### 字典的方法
+- get方法获取值
+```python
+person = {'name': '王大锤', 'age': 25, 'height': 178, 'addr': '成都市武侯区科华北路62号1栋101'}
+print(person.get('name'))       # 王大锤
+print(person.get('sex'))        # None
+print(person.get('sex', True))  # True
+```
+- keys等方法获取所有的键
+```python
+person = {'name': '王大锤', 'age': 25, 'height': 178}
+print(person.keys())    # dict_keys(['name', 'age', 'height'])
+print(person.values())  # dict_values(['王大锤', 25, 178])
+print(person.items())   # dict_items([('name', '王大锤'), ('age', 25), ('height', 178)])
+for key, value in person.items():
+    print(f'{key}:\t{value}')
+```
+- update合并两个字典
+```python
+person1 = {'name': '王大锤', 'age': 55, 'height': 178}
+person2 = {'age': 25, 'addr': '成都市武侯区科华北路62号1栋101'}
+person1.update(person2)
+print(person1)  # {'name': '王大锤', 'age': 25, 'height': 178, 'addr': '成都市武侯区科华北路62号1栋101'}
+```
+- 可以通过pop或popitem方法从字典中删除元素，前者会返回（获得）键对应的值，但是如果字典中不存在指定的键，会引发KeyError错误；后者在删除元素时，会返回（获得）键和值组成的二元组。字典的clear方法会清空字典中所有的键值对，代码如下所示
+```python
+person = {'name': '王大锤', 'age': 25, 'height': 178, 'addr': '成都市武侯区科华北路62号1栋101'}
+print(person.pop('age'))  # 25
+print(person)             # {'name': '王大锤', 'height': 178, 'addr': '成都市武侯区科华北路62号1栋101'}
+print(person.popitem())   # ('addr', '成都市武侯区科华北路62号1栋101')
+print(person)             # {'name': '王大锤', 'height': 178}
+person.clear()
+print(person)             # {}
+```
+- 跟列表一样，从字典中删除元素也可以使用del关键字，在删除元素的时候如果指定的键索引不到对应的值，一样会引发KeyError错误，具体的做法如下所示。
+```python
+person = {'name': '王大锤', 'age': 25, 'height': 178, 'addr': '成都市武侯区科华北路62号1栋101'}
+del person['age']
+del person['addr']
+print(person)  # {'name': '王大锤', 'height': 178}
+```
