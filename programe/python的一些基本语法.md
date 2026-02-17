@@ -243,3 +243,27 @@ del person['age']
 del person['addr']
 print(person)  # {'name': '王大锤', 'height': 178}
 ```
+---
+## 函数部分
+### 位置参数
+- 例如
+```python
+def make_judgement(a, b, c):
+    """判断三条边的长度能否构成三角形,可以返回True不可以返回False"""
+    return a + b > c and b + c > a and a + c > b
+```
+上面make_judgement函数有三个参数，这种参数叫做位置参数，在调用函数时通常按照从左到右的顺序依次传入，而且传入参数的数量必须和定义函数时参数的数量相同
+
+
+
+
+
+
+
+
+
+
+
+
+
+
