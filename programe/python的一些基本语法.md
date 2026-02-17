@@ -253,11 +253,128 @@ def make_judgement(a, b, c):
     return a + b > c and b + c > a and a + c > b
 ```
 上面make_judgement函数有三个参数，这种参数叫做位置参数，在调用函数时通常按照从左到右的顺序依次传入，而且传入参数的数量必须和定义函数时参数的数量相同
+- 还可以通过变量名来控制输入的数字的位置，例如print(make_judgement(b=3,c=2,a=1),这样调用
+- 强制位置参数可以使用/来设置，就是def make_judgement(a, b, c，/):   ，在调用这种函数时，不可以出现变量名（不可以像上一行一样调用）
+### 关键字参数
+- 命名关键字参数只能通过“参数名=参数值”的方式来传递和接收参数，大家可以看看下面的例子。
+```python
+# *后面的参数是命名关键字参数
+def make_judgement(*, a, b, c):
+    """判断三条边的长度能否构成三角形"""
+    return a + b > c and b + c > a and a + c > b
 
 
+# 下面的代码会产生TypeError错误，错误信息提示“函数没有位置参数但却给了3个位置参数”
+# TypeError: make_judgement() takes 0 positional arguments but 3 were given
+# print(make_judgement(1, 2, 3))
+```
+好像就是   print(make_judgement(b=3,c=2,a=1)  只能像这样调用函数
+---
+### 函数的默认参数
+- Python 中允许函数的参数拥有默认值例如
+```python
+def add(a=0, b=0, c=0):
+    """三个数相加求和"""
+    return a + b + c
 
 
+# 调用add函数，没有传入参数，那么a、b、c都使用默认值0
+print(add())         # 0
+# 调用add函数，传入一个参数，该参数赋值给变量a, 变量b和c使用默认值0
+print(add(1))        # 1
+# 调用add函数，传入两个参数，分别赋值给变量a和b，变量c使用默认值0
+print(add(1, 2))     # 3
+# 调用add函数，传入三个参数，分别赋值给a、b、c三个变量
+print(add(1, 2, 3))  # 6
+```
+需要注意的是，带默认值的参数必须放在不带默认值的参数之后，否则将产生SyntaxError错误，错误消息是：non-default argument follows default argument，翻译成中文的意思是“没有默认值的参数放在了带默认值的参数后面”。
+### 可变参数
+- Python 语言中可以通过星号表达式语法让函数支持可变参数。所谓可变参数指的是在调用函数时，可以向函数传入0个或任意多个参数。将来我们以团队协作的方式开发商业项目时，很有可能要设计函数给其他人使用，但有的时候我们并不知道函数的调用者会向该函数传入多少个参数，这个时候可变参数就能派上用场。
 
+- 下面的代码演示了如何使用可变位置参数实现对任意多个数求和的add函数，调用函数时传入的参数会保存到一个元组，通过对该元组的遍历，可以获取传入函数的参数。
+```python
+# 用星号表达式来表示args可以接收0个或任意多个参数
+# 调用函数时传入的n个参数会组装成一个n元组赋给args
+# 如果一个参数都没有传入，那么args会是一个空元组
+def add(*args):
+    total = 0
+    # 对保存可变参数的元组进行循环遍历
+    for val in args:
+        # 对参数进行了类型检查（数值型的才能求和）
+        if type(val) in (int, float):
+            total += val
+    return total
+
+
+# 在调用add函数时可以传入0个或任意多个参数
+print(add())         # 0
+print(add(1))        # 1
+print(add(1, 2, 3))  # 6
+print(add(1, 2, 'hello', 3.45, 6))  # 12.45
+```
+- 如果我们希望通过“参数名=参数值”的形式传入若干个参数，具体有多少个参数也是不确定的，我们还可以给函数添加可变关键字参数，把传入的关键字参数组装到一个字典中，代码如下所示。
+```python
+# 参数列表中的**kwargs可以接收0个或任意多个关键字参数
+# 调用函数时传入的关键字参数会组装成一个字典（参数名是字典中的键，参数值是字典中的值）
+# 如果一个关键字参数都没有传入，那么kwargs会是一个空字典
+def foo(*args, **kwargs):
+    print(args)
+    print(kwargs)
+
+
+foo(3, 2.1, True, name='骆昊', age=43, gpa=4.95)
+```
+---
+### 用模块管理函数
+- 不管用什么样的编程语言来写代码，给变量、函数起名字都是一个让人头疼的问题，因为我们会遇到命名冲突这种尴尬的情况。最简单的场景就是在同一个.py文件中定义了两个同名的函数，如下所示
+```python
+def foo():
+    print('hello, world!')
+
+
+def foo():
+    print('goodbye, world!')
+
+    
+foo()  # 大家猜猜调用foo函数会输出什么
+```
+当然上面的这种情况我们很容易就能避免，但是如果项目是团队协作多人开发的时候，团队中可能有多个程序员都定义了名为foo的函数，这种情况下怎么解决命名冲突呢？答案其实很简单，Python 中每个文件就代表了一个模块（module），我们在不同的模块中可以有同名的函数，在使用函数的时候，我们通过import关键字导入指定的模块再使用完全限定名（模块名.函数名）的调用方式，就可以区分到底要使用的是哪个模块中的foo函数，代码如下所示。
+- moudle1.py
+```python
+def foo():
+    print('hello, world!')
+```
+- moudle2.py
+```python
+def foo():
+    print('goodbye, world!')
+```
+- test.py
+```python
+import module1
+import module2
+
+# 用“模块名.函数名”的方式（完全限定名）调用函数，
+module1.foo()  # hello, world!
+module2.foo()  # goodbye, world!
+```
+在导入模块时，还可以使用as关键字对模块进行别名，这样我们可以使用更为简短的完全限定名(就是取小名，就是import pandas as pd)调用更方便
+- 但是，如果我们如果从两个不同的模块中导入了同名的函数，后面导入的函数会替换掉之前的导入，就像下面的代码，调用foo会输出goodbye, world!，因为我们先导入了module1的foo，后导入了module2的foo 。如果两个from...import...反过来写，那就是另外一番光景了。
+```python
+from module1 import foo
+from module2 import foo
+
+foo()  # goodbye, world!
+```
+如果想在上面的代码中同时使用来自两个模块的foo函数还是有办法的，大家可能已经猜到了，还是用as关键字对导入的函数进行别名，代码如下所示。
+```python
+from module1 import foo as f1
+from module2 import foo as f2
+
+f1()  # hello, world!
+f2()  # goodbye, world!
+```
+---
 
 
 
