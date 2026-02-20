@@ -375,7 +375,13 @@ f1()  # hello, world!
 f2()  # goodbye, world!
 ```
 ---
-
+## 异常处理（raise和try-except）
+#### raise，报告错误给使用者（抛出异常）
+#### try-except
+- try:
+  使用某个功能模块
+  except:
+  及时处理错误
 
 
 
