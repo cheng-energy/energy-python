@@ -381,7 +381,7 @@ f2()  # goodbye, world!
 - try:
   使用某个功能模块
   except:
-  及时处理错误,可以参考下面这个代码
+  捕获异常,可以参考下面这个代码
 ```python
   import random
 real = random.randint(1,100)
