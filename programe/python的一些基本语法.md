@@ -382,7 +382,7 @@ f2()  # goodbye, world!
   使用某个功能模块
   except:
   及时处理错误,可以参考下面这个代码
-  ```python
+```python
   import random
 real = random.randint(1,100)
 account = 0
