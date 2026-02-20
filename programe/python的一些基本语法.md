@@ -381,7 +381,36 @@ f2()  # goodbye, world!
 - try:
   使用某个功能模块
   except:
-  及时处理错误
+  及时处理错误,可以参考下面这个代码
+  ```python
+  import random
+real = random.randint(1,100)
+account = 0
+list1 =[]
+while True:
+    guess = input('请输入你猜测的数字（范围是1到100）：')
+    if guess == 'q':
+        break
+    try:
+        guess = int(guess)
+        if not(1<=guess<=100):
+            print('输入错误，请重新输入1到100之间的数')
+            continue
+    except ValueError:
+        print('输入无效，请重新输入或者按q退出')
+        continue
+    account += 1
+    list1.append(guess)
+    if real == guess:
+        print('恭喜你猜对了')
+        break
+    elif real > guess:
+        print('猜小了')
+    else:
+        print('猜大了')
+print(f'一共猜测了{account}次')
+print(f'你猜测的记录是{list1}')
+```
 
 
 
