@@ -415,9 +415,29 @@ print(f'你猜测的记录是{list1}')
 ## 高阶函数
 - 使用函数作为另外一个函数的参数和返回值
 
-
-
 # 字符串格式化
+## 三代的演变
+- 远古时代：C的风格，使用%占位符
+- 工业时代：使用.format的方法
+- 现代标准：f-string
+
+## 一，字符串格式化（远古时代）
+- 基本语法：使用%来连接字符串和变量元组：“string”%{values}
+- 案例：
+```python
+'''字符串格式化远古时代'''
+name = 'python'
+do = '学习'
+version = 3.13
+print('欢迎来到name的do')  #欢迎来到name的do
+print('欢迎来到 %s的%s'%(name,do))
+print('欢迎来到 %s %f的%s'%(name,version,do))  #欢迎来到 python 3.130000的学习
+print('欢迎来到 %s %.2f的%s'%(name,version,do))   #欢迎来到 python 3.13的学习
+```
+
+
+
+## 二，字符串格式化（.format工业时代的方法）
 - 字符串格式化使用.format（）方法，用法如下
 
 <模板字符串>.format(<逗号分隔的参数>)
