@@ -47,11 +47,19 @@ def fact(n,m=1)         #提供m的数值时就按照提供的数值，不提供
     return s//m
 a = fact(5)
 b = fact(5,5)
-print(a)
-print(b)
+print(a)      #120
+print(b)      #24
 ```
 
+可变参数传递：
+- 函数定义时可以设计可变数量变量参数（不确定参数的总数量）
 
+    def <函数名>（<参数>，*b）
+        <函数体>
+        return  <返回值>
+
+
+          
 
 
 
