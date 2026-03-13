@@ -80,13 +80,47 @@ print(a)
 返回多个结果：
 “ return  s//m，n，m ”可以这样写，返回一个括号里面带着这三个数（元组类型）
 
-## 局部变量和全局变量
-- 程序全局变量，函数局部变量（定义中的变量）
+## 局部变量和全局变量[程序全局变量，函数局部变量（定义中的变量）]
   
-规则
-1. 局部变量和全局变量是不同变量
+规则:
+1. 局部变量和全局变量是不同变量(基本数据类型)
+2. 局部变量如果是组合数据类型（如列表），且在函数定义中未被创建，则默认该组合数据类型是全局变量
 
-可以使用global在函数定义时使用全局变量
+- 可以使用global在函数定义时使用全局变量，案例如下
+```python
+n,s = 10,100
+def fact(n):
+    s = 1
+    for i in range(1,n+1):
+        s *= i
+    return s               #局部变量s的值是3628800
+print(fact(n),s)      #   3628800,100        全局变量s的值是100
+
+---
+n,s = 10,100
+def fact(n)
+    global s      #声明s是全局变量
+    for i in range(1,n+1):
+        s *= i
+    return s
+print(fact(n),s)    #362880000
+```
+- 组合数据类型案例如下
+```python
+ls = ['A','B']
+def fact(a):
+    ls.append(a)
+    return ls
+print(fact('c'))        #'A''B''c'
+# ################
+ls = ['A','B']
+def fact(a):
+    ls = []
+    ls.append(a)
+    return ls
+print(fact('c'))         #'c'
+```
+
 
 
 
