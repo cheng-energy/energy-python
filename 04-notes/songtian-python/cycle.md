@@ -74,7 +74,17 @@ while True:
 ```
 上面的代码，当i遍历s使得i的值是h的时候，break终止这一次的for循环（打破了这次的for循环，不在执行print函数，之后while循环继续循环）
 
-
+循环的高级操作（与else的搭配）
+- 就是在for循环和while循环后面加一个else语句，只有循环没有执行break时else后面的语句才会被执行。类似于使用try-except捕获异常时，在最后增加else语句，如果没有发生异常，则会奖励性执行else语句
+```python
+for i in 'python':
+    if i =='h':
+        continue
+    print(i)
+else:
+    print('正常退出')
+```
+```python
 
 
 
