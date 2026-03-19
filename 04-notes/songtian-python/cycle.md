@@ -37,15 +37,42 @@ for i in fi
 
 ## 还可对元组，列表，字典等进行遍历循环
 
+## 无线循环（while循环）
+- while <条件>：
+
+      <语句块>
+只要条件成立，语句块就会一直被执行
 
 
+## 循环控制的保留字（break和continue）
+- break：打破本层循环，继续执行后续代码块
+- continue： 结束本次循环，继续下一次的循环
 
-
-
-
-
-
-
+代码案例：
+```python
+a = 3
+while a > 0:
+    a -=1
+    print(a)   #while循环
+```
+```python
+#%%
+s = 'python'
+for i in s:
+    if i =='h':
+        continue
+    print(i,end=',')         #p y t o n
+```
+使用遍历循环，如果i==h的时候，执行continue跳过这次循环进行下一次的循环。
+```python
+s = 'python'
+while True:
+    for i in s:
+        if i =='h':
+            break
+        print(i,end=',')      # p y t p y t p y t ......p y t 
+```
+上面的代码，当i遍历s使得i的值是h的时候，break终止这一次的for循环（打破了这次的for循环，不在执行print函数，之后while循环继续循环）
 
 
 
