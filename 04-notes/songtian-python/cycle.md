@@ -84,8 +84,6 @@ for i in 'python':
 else:
     print('正常退出')
 ```
-```python
-
 
 
 
