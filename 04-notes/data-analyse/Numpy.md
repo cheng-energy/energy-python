@@ -23,14 +23,29 @@ x = np.array(list/tuple,dtype=np.float32)  # 可以根据dtype来指定数据类
 2. 使用numpy提供的创建函数
 ```python
 np.range(n)    #类似range函数返回ndarry类型，范围从0到n-1
-np.ones(shape)  #根据shape生成一个全是1的数组，shape是元组类型
+np.ones(shape)  #根据shape生成一个全是1的数组，shape是元组类型shape就是指几行几列   #np.ones((3,6))生成3行6列全是1的数组
 np.zeros(shape)  #根据shape生成一个全是0的数组shape是元组类型
-np.full(shape,val)  #根据shape生成一个数组，每个元素值是val
-np。eye(n)  #创建一个n*n的单位矩阵，对角线为1其他为0
+np.full(shape,value)  #根据shape生成一个数组，每个元素值是value(value是给定的）
+np.eye(n)  #创建一个n*n的单位矩阵，对角线为1其他为0
 ```
+不指定类型情况下，只有np.range是返回整数类型，其他都是浮点数
 
-
-
+x.shape可以返回数组x的形状是几行几列（要先把数组赋值给x）
+```python
+np.ones_like(a)   #根据数组a的形状生成全是1的数组
+np.zeros_like(a)
+np.full_like(a，val)
+```
+3. 使用numpy中其他函数生成数组
+```python
+np.linspace()  #根据起止数据等间距的填充数据，形成数组
+np.concatenate()  #将两个或者多个数组合并成新的数组
+---
+np.linspace(1,100,20)  #第一个元素是1最后一个是100，生成20个元素，不指定数据类型时都是浮点数
+np.linspace(1,10,10,endpoint=False) #这个endpoint的意思是表示最后一个数是否是指定的终止数，在这个例子中是说最后一个数是否是10
+np.concatenate((a,b))
+```
+- numpy中除了np.range（）以外生成的数据类型都是浮点数（不指定的情况下），因为实际的应用中很难刚好获得整数
 
 
 
