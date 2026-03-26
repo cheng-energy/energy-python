@@ -22,6 +22,7 @@ Pyinstaller它不是python下面的执行指令，是（amd）命令行的执行
 1. windows+r   然后在出现窗口中输入cmd回车
 2. 使用cd: 文件名的方式到达所要打包的文件所在地
 3. 输入pyinstaller的使用参数+回车来打包
+4. 切换盘符，例如切换到E盘就是E：
 
 
 
