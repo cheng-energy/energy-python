@@ -43,11 +43,30 @@ np.concatenate()  #将两个或者多个数组合并成新的数组
 ---
 np.linspace(1,100,20)  #第一个元素是1最后一个是100，生成20个元素，不指定数据类型时都是浮点数
 np.linspace(1,10,10,endpoint=False) #这个endpoint的意思是表示最后一个数是否是指定的终止数，在这个例子中是说最后一个数是否是10
-np.concatenate((a,b))
+np.concatenate((a,b))  #np.concatenate([a,b])  或者这个
 ```
 - numpy中除了np.range（）以外生成的数据类型都是浮点数（不指定的情况下），因为实际的应用中很难刚好获得整数
 
+### ndarray数组的变换（维度变换和元素类型变换）
+#### 维度变换
+```python
+# 先创建一个数组
+a = np.array([1,2,3,4,5,,6,7,8,9,10])
+a.reshape((5,2))  #不改变数组元素，但是如果元素个数与规定的新的形状不匹配会报错，原数组是不变的就是说a还是上面那个形状
+a.resize(shape)   #这个会修改原来数组，a的形状会被改变
+a.swapaxes(ax1,ax2)  #将数组n个维度中的两个维度调换
+a.flatten()  #对数组降维，使它变成一维数组，原数组不变
+```
+#### 类型变换
+```python
+# 首先要有一个数组
+b = a.astype(nem_type）  # 可以简写为int由程序自动识别是int32或者int64
+# 他一定会创建新的数组，不改变原数组
+# astype更像是一个元素的拷贝
 
+# ndarry数组向列表的转化
+ls = a.tolist()   
+```
 
 
 
