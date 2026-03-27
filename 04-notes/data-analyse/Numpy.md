@@ -151,7 +151,7 @@ np.log2()
 np.ceil(x)-------计算各元素的ceiling和floor值
 np.floor(x)-------ceiling是返回大于或者等于该元素的最小整数，floor是指小于或者等于这个元素的最大整数值
 ```
-！(数组运算的其他操作，四舍五入，计算各元素符号值（该元素是正还是负），双曲型三角函数等)[https://github.com/cheng-energy/energy-python/blob/main/images/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-03-27%20193738.png?raw=true]
+！(数组运算的其他操作，四舍五入，计算各元素符号值（该元素是正还是负），双曲型三角函数等)[https://github.com/cheng-energy/energy-python/images/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-03-27%20193738.png?]
 
 
 
