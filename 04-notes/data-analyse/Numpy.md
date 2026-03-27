@@ -13,6 +13,17 @@ PS：一维数据还可以用数组表示，数组就是说列表中的数据类
 - ndarray；多维数组对象
 
 ## ndarray的创建和变换
+### 数组ndarry的属性
+```python
+import numpy as np
+a = np.array([[1,2,3], [4,5,6]], dtype=np.int32)
+
+print(a.ndim)    # 输出 2（二维数组）
+print(a.shape)   # 输出 (2, 3)（2行3列）
+print(a.size)    # 输出 6（共6个元素）
+print(a.dtype)   # 输出 int32（元素类型）
+print(a.itemsize)# 输出 4（每个int32占4字节）
+```
 ### ndarray的创建
 1. 从python的列表元组来创建ndarray数组
 ```python
