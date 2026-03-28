@@ -47,10 +47,17 @@ a.tofile('b.dat',format='%d')  #没有指定sep，这个文件是一个二进制
 ```python
 a = np.arange(60).reshape(12,5)
 a.tofile('b.dat',format='%d',sep=',')
-c = np.fromfile('b.dat',dtype=np.float64,sep=',')
+c = np.fromfile('b.dat',dtype=np.float64,sep=',').reshape(12,5)
 c
 ```
+使用这种方式读取数据必须知道原本数据读入文件时的维度信息，这样才能还原数据
 
+写入方式	读取方式	是否匹配	结果
+tofile(sep=' ', format='%d')（文本）	fromfile(sep='', dtype=np.float64)（二进制）	❌ 不匹配	乱码
+
+tofile()（二进制）	fromfile(dtype=np.int64, sep='')（二进制）	✅ 匹配	正常
+
+tofile(sep=' ', format='%d')（文本）	fromfile(dtype=np.int64, sep=' ')（文本）	✅ 匹配	正常
 
 
 
