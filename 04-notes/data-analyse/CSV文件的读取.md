@@ -29,6 +29,54 @@ c
 ## 局限性
 - 只能有效读取一维和二维数据
 
+# 多维数据的读取
+## .tofile和.fromfile
+- a.tofile（frame,sep,format='%s'
+1. frame:文件，字符串
+2. sep:数据分割字符串，如果是空串，写入文件是二进制
+3. format:写入数据的格式
+```python
+a = np.arange(60).reshape(12,5)
+a.tofile('b.dat',format='%d')  #没有指定sep，这个文件是一个二进制的文件，文本编译器看不懂
+#不过二进制文件占据内存更小，可以做为储存备份数据的一种方式
+```
+这样写入的数据没有任何的维度信息，他只是把数据逐一列出写入文件
+- np.fromfile(drame,dtype=float,count=-1,sep='')
+1. dtype是读取数据的格式
+2. count是读入元素的个数，默认是-1，-1就是读入所有的元素
+```python
+a = np.arange(60).reshape(12,5)
+a.tofile('b.dat',format='%d',sep=',')
+c = np.fromfile('b.dat',dtype=np.float64,sep=',')
+c
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
