@@ -52,12 +52,13 @@ c
 ```
 使用这种方式读取数据必须知道原本数据读入文件时的维度信息，这样才能还原数据
 
-写入方式	读取方式	是否匹配	结果
-tofile(sep=' ', format='%d')（文本）	fromfile(sep='', dtype=np.float64)（二进制）	❌ 不匹配	乱码
+读入数据的格式要和读取数据的格式相同：
 
-tofile()（二进制）	fromfile(dtype=np.int64, sep='')（二进制）	✅ 匹配	正常
-
-tofile(sep=' ', format='%d')（文本）	fromfile(dtype=np.int64, sep=' ')（文本）	✅ 匹配	正常
+|写入方式|读取方式|是否匹配|结果|
+|---|---|---|---|
+|tofile(sep=' ', format='%d')（文本）|	fromfile(sep='', dtype=np.float64)（二进制）|❌ 不匹配	乱码
+|tofile()（二进制）|	fromfile(dtype=np.int64, sep='')（二进制）|✅ 匹配	正常
+|tofile(sep=' ', format='%d')（文本）|	fromfile(dtype=np.int64, sep=' ')（文本）|	✅ 匹配	正常
 
 
 
