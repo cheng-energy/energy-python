@@ -50,7 +50,7 @@ a.tofile('b.dat',format='%d',sep=',')
 c = np.fromfile('b.dat',dtype=np.float64,sep=',').reshape(12,5)
 c
 ```
-使用这种方式读取数据必须知道原本数据读入文件时的维度信息，这样才能还原数据
+使用这种方式读取数据必须知道原本数据读入文件时的维度信息还有元素类型 (再写一个文件，把维度元素等信息存储起来）这样才能还原数据
 
 读入数据的格式要和读取数据的格式相同：
 
@@ -60,6 +60,12 @@ c
 |tofile()（二进制）|	fromfile(dtype=np.int64, sep='')（二进制）|✅ 匹配	| 正常
 |tofile(sep=' ', format='%d')（文本）|	fromfile(dtype=np.int64, sep=' ')（文本）|	✅ 匹配 | 正常
 
+## Numpy提供的非常便捷的存储文件的方法
+- np.save(framee,array)---不压缩或者np.savez(frame,array)----压缩格式
+1. frame:文件名，以.npy为扩展名，压缩扩展名为.npz
+2. array:数组变量
+- np.load(frame)
+1. frame:文件名，以.npy为扩展名，压缩扩展名为.npz
 
 
 
