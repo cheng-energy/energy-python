@@ -18,6 +18,13 @@ np.savetxt('a.csv',a,fmt='%d',delimiter=',')
 2. dtype---指定读入文件的类型（默认是浮点数），获取整数时最好写np.int64
 3. delimiter---分隔字符串
 4. unpack---默认是False如果是True读入的属性将写入不同的变量
+```python
+import numpy as np
+a = np.arange(100).reshape(5,20)
+np.savetxt('a.csv',a,fmt='%d',delimiter=',')
+c = np.loadtxt('a.csv',dtype=np.int64,delimiter=',')
+c
+```
 
 ## 局限性
 - 只能有效读取一维和二维数据
