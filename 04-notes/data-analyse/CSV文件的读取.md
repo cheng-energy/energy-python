@@ -56,9 +56,9 @@ c
 
 |写入方式|读取方式|是否匹配|结果|
 |---|---|---|---|
-|tofile(sep=' ', format='%d')（文本）|	fromfile(sep='', dtype=np.float64)（二进制）|❌ 不匹配	乱码
-|tofile()（二进制）|	fromfile(dtype=np.int64, sep='')（二进制）|✅ 匹配	正常
-|tofile(sep=' ', format='%d')（文本）|	fromfile(dtype=np.int64, sep=' ')（文本）|	✅ 匹配	正常
+|tofile(sep=' ', format='%d')（文本）|	fromfile(sep='', dtype=np.float64)（二进制）|❌ 不匹配	| 乱码
+|tofile()（二进制）|	fromfile(dtype=np.int64, sep='')（二进制）|✅ 匹配	| 正常
+|tofile(sep=' ', format='%d')（文本）|	fromfile(dtype=np.int64, sep=' ')（文本）|	✅ 匹配 | 正常
 
 
 
