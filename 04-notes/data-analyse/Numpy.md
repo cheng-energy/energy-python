@@ -195,7 +195,12 @@ np.random.choice(a,size=12,replace=True,p=b/np.sum(b))
 
 
 
-
+## Numpy的统计函数
+- sum
+- mean
+- average
+- std
+- var
 
 
 
