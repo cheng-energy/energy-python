@@ -192,7 +192,11 @@ b = np.array([1,2,3])
 np.random.choice(a,size=12,replace=True,p=b/np.sum(b))
 ```
 
+
+
  ![随机函数补充必看](https://github.com/cheng-energy/energy-python/blob/main/images/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-03-29%20202607.png)
+
+
 
 
 
