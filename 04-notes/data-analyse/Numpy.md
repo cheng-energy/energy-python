@@ -185,8 +185,12 @@ np.floor(x)-------ceiling是返回大于或者等于该元素的最小整数，f
 高级的：
 - np.random.shuffle()----根据数组a的最外维度进行随机排列，排列后a被改变
 - np.random.permutation()----根据数组a的最外维度进行随机排列，数组不会被改变
-- np.random.choice()----从一堆数组a中以概率p抽取元素，形成size新形状数组，replace表示是否可以使用被抽取过的元素，默认为False
-
+- np.random.choice(a,(size),replace,p)----从一堆数组a中以概率p抽取元素，形成size新形状数组，replace表示是否可以使用被抽取过的元素，默认为False
+```python
+a = np.random.randint(0,100,(3,))
+b = np.array([1,2,3])
+np.random.choice(a,size=12,replace=True,p=b/np.sum(b))
+```
 
 
 
