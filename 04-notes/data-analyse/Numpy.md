@@ -176,8 +176,16 @@ np.floor(x)-------ceiling是返回大于或者等于该元素的最小整数，f
 6. > < >= <= == != ----算术比较，返回布尔类型
 
 ## Numpy的随机数函数
-
-
+- Numpy提供了random的字库，使用方式是np.random.
+1. np.random.rand(d0,d1,......dn)----d0这些是指维度，范围是0到1，左闭右开区间，均匀分布
+2. np.random.randn（）---- 括号里面依然是维度，这个是标准的正态分布
+3. np.random.randint(a,b,(shape))----从a到b，左闭右开，shape就是形状
+4. seed(s)----种子，和python基本一样
+---
+高级的：
+- np.random.shuffle()----根据数组a的最外维度进行随机排列，排列后a被改变
+- np.random.permutation()----根据数组a的最外维度进行随机排列，数组不会被改变
+- np.random.choice()----从一堆数组a中以概率p抽取元素，形成size新形状数组，replace表示是否可以使用被抽取过的元素，默认为False
 
 
 
