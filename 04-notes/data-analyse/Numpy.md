@@ -250,11 +250,11 @@ np.random.choice(a,size=12,replace=True,p=b/np.sum(b))
 
 
 ## Numpy的统计函数
-- sum
-- mean
-- average
-- std
-- var
+- sum(a,axis=None)----根据给定轴来计算数组a的相关元素之和，默认None就是a的所有元素，axis是整数或者元组（可以是多个轴的元素求和）
+- mean(a,axis=None)---根据给定轴计算相关元素的期望
+- average(a,axis=None,weights=None)---加权平均值（weights是权重，默认是等权重计算的）
+- std(a,axis=None)---标准方差差
+- var(a,axis=None)---
 
 
 
