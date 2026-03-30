@@ -253,9 +253,13 @@ np.random.choice(a,size=12,replace=True,p=b/np.sum(b))
 - sum(a,axis=None)----根据给定轴来计算数组a的相关元素之和，默认None就是a的所有元素，axis是整数或者元组（可以是多个轴的元素求和）
 - mean(a,axis=None)---根据给定轴计算相关元素的期望
 - average(a,axis=None,weights=None)---加权平均值（weights是权重，默认是等权重计算的）
-- std(a,axis=None)---标准方差差
-- var(a,axis=None)---
-
+- std(a,axis=None)---标准差
+- var(a,axis=None)---方差
+- min(a) max(a)
+- argmin(a)---argmax(a)----计算数组a的最小值最大值降一维后的下标
+- unravel_index(index,shape)----根据shape把下一维下标index转换成多维下标
+- ptp（a） ---- 计算a中元素最大值和最小值的差
+- media（a）----计算数组a的中位数
 
 
 
