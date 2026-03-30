@@ -261,7 +261,8 @@ np.random.choice(a,size=12,replace=True,p=b/np.sum(b))
 - ptp（a） ---- 计算a中元素最大值和最小值的差
 - media（a）----计算数组a的中位数
 
-
+## 梯度函数（梯度就是斜率）-连续坐标的变化率
+- np.gradient(f)----计算f中元素的梯度，当f是多维时。返回每个维度梯度
 
 
 
