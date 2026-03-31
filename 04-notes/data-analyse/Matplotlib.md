@@ -128,4 +128,31 @@ plt.show()
 
 
 
+### 线条的格式等还可以使用命行来控制
+- color = 某个值来控制颜色 
+- linestyle   线条风格
+- marker    标记风格
+- markerfacecolor   标记的颜色
+- marksize    标记的尺寸
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
