@@ -151,8 +151,12 @@ plt.show()
 4. YouYuan  幼圆
 5. STSong   宋体
 
+### 中文字体显示的方法二（局部字体的改变）---推荐
+- 在有中文输入的地方增加一个属性
+- fontproperties = 'LiSu'  -- 字体名称
+- fontsize = 20  -- 字体大小
 
-
+例子：plt.ylabel('纵轴：数据'，fontproperties = 'LiSu'，fontsize = 20)
 
 
 
