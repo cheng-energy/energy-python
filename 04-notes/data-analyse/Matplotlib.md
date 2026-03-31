@@ -57,6 +57,34 @@ plt.show()
 
 
 
+- pypiot的绘图区域，使用plt.subplot(nrows,ncols,plt_number)
+- nrows是横行有几个部分，ncols是纵向有几列，plt_number是当前绘图区域是几行
+- 接下来尝试把上面两个图放在一个画布的不同绘图区域，例如划分6个区域把两个图片放在1和6子区域上
+```python
+plt.subplot(3,2,1)
+plt.plot([3,1,4,5,2])    
+plt.ylabel('some numbers')  
+plt.subplot(326)   #中间的逗号是可以省略的
+plt.plot([3,1,4,5,2],[1,2,3,4,5],'r--')
+plt.ylabel('some numbers')
+plt.axis([-1,10,0,6])
+plt.savefig('绘图区域练习.png',dpi=1000)
+plt.show()
+```
+![绘图区域小练习](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E7%BB%98%E5%9B%BE%E5%8C%BA%E5%9F%9F%E7%BB%83%E4%B9%A0.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
