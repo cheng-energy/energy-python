@@ -135,7 +135,21 @@ plt.show()
 - markerfacecolor   标记的颜色
 - marksize    标记的尺寸
 
+## pyplot的中文显示
+- 正常如果直接输入中文是无法实现显示中文的，pyplot提供了其他的方式来实现中文的显示（两种方法）
+### 一.使用rcParams修改字体来实现（全局字体的改变）
+- matplotlib.rcParams 【'font.family'】 = 'SimHei'    黑体（【】应该是英文状态的列表符号）
+- 接下来使用方式类似
+1. 【'font.family'】 ---显示字体的名称
+2. 【'font.style'】 ---字体的风格（italic是斜体）
+3. 【'font.size'】 ---指定字体的大小或者是‘large’和‘x-small’
 
+常见字体的名称
+1. Kaiti   楷体
+2. LiSu   隶书
+3. FangSong  仿宋
+4. YouYuan  幼圆
+5. STSong   宋体
 
 
 
