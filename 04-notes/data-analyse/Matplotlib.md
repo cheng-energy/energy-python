@@ -8,8 +8,7 @@ plt.savefig('plot.png',dpi=1000) # 这个是保存生成的图片，单引号里
 plt.show()
 ```
 生成的图片如下
-![演示生成图](https://github.com/cheng-energy/energy-python/blob/main/images/plot.png)
-
+![演示生成图](https://github.com/cheng-energy/energy-python/blob/main/images/plot.png?raw=true)
 
 
 
