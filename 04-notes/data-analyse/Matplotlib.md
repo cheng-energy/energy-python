@@ -195,7 +195,7 @@ plt.show()
 2. xy=arow_crd-----箭头位置
 3. xytext=tet_crd------文本位置
 4. arrowprops=dict-----字典类型定义箭头显示的一些属性
-```pythpn
+```python
 import numpy as np
 a = np.arange(0.0,5.0,0.02)
 plt.plot(a,np.cos(2*np.pi*a),)
@@ -207,8 +207,18 @@ plt.axis([-1,6,-2,2])
 plt.grid(True)
 plt.savefig('余弦波实例',dpi=1000)
 plt.show()
+# xy=(2,1)是箭头所在位置，xytext是文本所在位置，width是箭头宽度是2
+# shrink=0.1 表示：箭头的起点（xytext 位置）和终点（xy 位置），都向箭头中心方向缩短「箭头总长度的 10%」
+#还可以只控制箭头一端的缩短
+arrowprops=dict(
+    facecolor='black',
+    width=2,
+    shrinkA=0,    # 箭头尖端和目标点的距离（像素），设0就不缩尖端
+    shrinkB=5     # 箭尾和文字的距离（像素），设5就只剪尾)
 ```
 ![](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E4%BD%99%E5%BC%A6%E6%B3%A2%E5%AE%9E%E4%BE%8B.png)
+
+
 
 
 
