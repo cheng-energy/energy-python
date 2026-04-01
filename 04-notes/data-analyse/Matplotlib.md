@@ -157,8 +157,19 @@ plt.show()
 - fontsize = 20  -- 字体大小
 
 例子：plt.ylabel('纵轴：数据'，fontproperties = 'LiSu'，fontsize = 20)
-
-
+```python
+import matplotlib.pyplot as plt
+plt.subplot(3,2,1)
+plt.plot([3,1,4,5,2])
+plt.ylabel('超级数字',fontproperties='LiSu')
+plt.subplot(326)
+plt.plot([3,1,4,5,2],[1,2,3,4,5],'r--')
+plt.ylabel('中文排版',fontproperties='FangSong',fontsize=20)
+plt.axis([-1,10,0,6])
+plt.savefig('绘图区域练习.png',dpi=1000)
+plt.show()
+```
+![中文显示练习](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E7%9A%84%E7%BB%83%E4%B9%A0.png)
 
 
 
