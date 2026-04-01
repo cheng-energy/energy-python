@@ -232,6 +232,34 @@ arrowprops=dict(
 
 
 
+## pyplot的子绘图区域方法
+- 前面虽然有绘图区域的介绍subplot，但是那个绘图区域是被规整划分的，无法做到随心所欲。例如绘制下方这个子绘图区域无法做到
+
+![](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E8%AE%BE%E8%AE%A1%E5%AD%90%E7%BB%98%E5%9B%BE%E5%8C%BA%E5%9F%9F.png)
+
+
+
+
+
+
+- 接下来介绍一个方法subplot2grid（GridSpace，CurSpec，colspan=1，rowspan=1）
+
+理念：设定网格，选中网格，缺点选中行列区域数量，编号从0开始
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
