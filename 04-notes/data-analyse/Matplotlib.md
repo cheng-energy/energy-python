@@ -183,5 +183,48 @@ plt.show()
 
 
 
+## 文本显示函数
+### 常用函数
+- plt.xlabel()
+- plt.ylabel()
+- plt.title()-------图形文本的整体标题
+- plt.text()--------任意位置文本
+- plt.annotate()----图形中增加带箭头的注解
+- plt.annotate(s,xy=arow_crd,xytext=tet_crd,arrowprops=dict)
+1. s----注解文字是什么
+2. xy=arow_crd-----箭头位置
+3. xytext=tet_crd------文本位置
+4. arrowprops=dict-----字典类型定义箭头显示的一些属性
+```pythpn
+import numpy as np
+a = np.arange(0.0,5.0,0.02)
+plt.plot(a,np.cos(2*np.pi*a),)
+plt.xlabel('横轴：时间',fontproperties='FangSong',fontsize=25,color='red')
+plt.ylabel('纵轴：振幅',fontproperties='FangSong',fontsize=25,color='green')
+plt.title('余弦波实例',fontproperties='LiSu',fontsize=30,color='blue')
+plt.annotate(r'$\mu=100$',xy=(2,1),xytext=(3,1.5),arrowprops=dict(facecolor='black',shrink=0.1,width=2))
+plt.axis([-1,6,-2,2])
+plt.grid(True)
+plt.savefig('余弦波实例',dpi=1000)
+plt.show()
+```
+![](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E4%BD%99%E5%BC%A6%E6%B3%A2%E5%AE%9E%E4%BE%8B.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
