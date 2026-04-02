@@ -1,5 +1,7 @@
 # Matplotlib库的介绍
-- [Matplotlib库的官方网址][http;//matplotlib.org/gallery.html]
+
+URL: http;//matplotlib.org/gallery.html
+
 - Matplotlib是python可视化分析的优秀库，内部可视化模块分成了很多类
 - 直接使用.pyplot这个命令字库就可以使用所有可视化的类
 ```pythonimport matplotlib.pyplot as plt
