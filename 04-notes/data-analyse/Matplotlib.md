@@ -308,9 +308,28 @@ plt.show()#生成了扁扁的饼图，shadow是指这个饼图是否是一个有
 
 
 
-
-
-
+## 直方图的绘制练习
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+np.random.seed(0)
+mu , sigma = 100,20 #均值和方差
+a = np.random.normal(mu,sigma,100)  #均值方差给定的正态分布的数组
+plt.hist(a,40,density=1,histtype='step',facecolor='b',alpha=0.75)
+plt.title('直方图练习',fontproperties='FangSong',fontsize=25,color='red')
+plt.savefig('直方图练习',dpi=1000)
+plt.show()
+# 关键参数有两个，一个是a一个是bin就是绘制的第二个参数40，表示的是直方的个数是多少
+# (有20个直立的直方)，density=1（True）就是将每一个直方中出现的元素的个数划分为概率
+# 所以此时纵坐标是小数形式，当density=False（0）的时候，纵坐标就是出现元素的个数
+#histtype是直方图中整体的展现样式，有四种
+#1.bar---传统的直方图，每个区间是独立的实心矩形柱
+#2.barstacked--堆叠柱直方图，多组数据时，柱子垂直堆叠（一组叠在另一组上方）
+#3.step---阶梯线图（无填充）：只画外轮廓线，不填充颜色。
+#4.stepfilled----填充阶梯图：阶梯轮廓 + 内部填充（默认同色）
+#alpha 是透明度参数，参数范围是0到1，最常用的场景：多组数据直方图重叠时，能看清后面的柱子。
+```
+![](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%BB%83%E4%B9%A0.png)
 
 
 
