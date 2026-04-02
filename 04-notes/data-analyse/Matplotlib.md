@@ -283,6 +283,7 @@ ax5 = plt.subplot(gs[2,1])  #代码生成图片如下
 
 
 ## pyplot的基础图表概述
+- 有非常多的种类，可以去[matplotlib库网页](https://matplotlib.org/stable/gallery/)自行查看学习
 
 
 
