@@ -284,8 +284,19 @@ ax5 = plt.subplot(gs[2,1])  #代码生成图片如下
 
 ## pyplot的基础图表概述
 - 有非常多的种类，可以去[matplotlib库网页](https://matplotlib.org/stable/gallery/)自行查看学习
-
-
+### pyplot饼图绘制
+```python
+import matplotlib.pyplot as plt
+labels = ('frogs','hogs','dogs','logs')
+sizes  = (15,30,45,10)
+explode= (0,0,0.1,0)  #这个0.1是指让45这个数据的饼图部分突出比例为0.1
+plt.pie(sizes,explode=explode,labels=labels, autopct='%1.1f%%',shadow=False,startangle=90)
+plt.axis('equal')  #这个使得绘制饼图时x和y方向是相等的（变成了正圆的饼图）
+plt.savefig('饼图绘制练习',dpi=1000)
+plt.show()#生成了扁扁的饼图，shadow是指这个饼图是否是一个有阴影的图，statangle是指饼图起始的角度是什么样子，autopct='%1.1f%%'这个是指饼图百分数显示的方式
+#除此之外还可以增加更多的语句去配置标题等其他内容
+```
+![](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E9%A5%BC%E5%9B%BE%E7%BB%98%E5%88%B6%E7%BB%83%E4%B9%A0.png)
 
 
 
