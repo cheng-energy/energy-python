@@ -262,9 +262,9 @@ ax1 = plt.subplot(gs[0,:])
 ax2 = plt.subplot(gs[1,:-1])
 ax3 = plt.subplot(gs[1:,-1])
 ax4 = plt.subplot(gs[2,0])
-ax5 = plt.subplot(gs[2,1])
+ax5 = plt.subplot(gs[2,1])  #代码生成图片如下
 ```
-
+![](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E8%AE%BE%E8%AE%A1%E5%AD%90%E7%BB%98%E5%9B%BE.png)
 
 
 
