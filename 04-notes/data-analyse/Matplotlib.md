@@ -254,7 +254,16 @@ arrowprops=dict(
 注意：这个方法每一次都需要对子区域划分进行设计，例如（3，3）这种操作
 - 可以结合gridspec来简化操作,案例如下：
 ```python
-
+import matplotlib as plt
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+gs = gridspec.GridSpec(3,3)
+ax1 = plt.subplot(gs[0,:])
+ax2 = plt.subplot(gs[1,:-1])
+ax3 = plt.subplot(gs[1:,-1])
+ax4 = plt.subplot(gs[2,0])
+ax5 = plt.subplot(gs[2,1])
+```
 
 
 
