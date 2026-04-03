@@ -28,8 +28,6 @@ plt.show()
 
 
 
-
-
 - 如果输入的是两个列表，
 ```python
 import matplotlib.pyplot as plt
