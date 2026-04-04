@@ -1,3 +1,4 @@
+
 import xlrd
 xlsx= xlrd.open_workbook('d://python/工作.xlsx')
 biaoqian =xlsx.sheet_by_index(0)
@@ -101,3 +102,4 @@ fig, ax1 = plt.subplots(figsize=(10, 6))
 # plt.show()
 #
 # wb.close()
+
