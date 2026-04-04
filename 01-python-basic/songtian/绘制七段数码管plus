@@ -1,0 +1,50 @@
+import turtle ,time
+def drawgap():
+    turtle.penup()
+    turtle.fd(5)
+def drawline(draw):
+    drawgap()
+    turtle.down() if draw else turtle.up()
+    turtle.fd(40)
+    drawgap()
+    turtle.right(90)
+def drawdigit(digit):
+    drawline(True) if digit in [2,3,4,5,6,7,8,9] else drawline(False)
+    drawline(True) if digit in [0,1,3,4,5,6,7,8,9] else drawline(False)
+    drawline(True) if digit in [0,2,3,5,6,7,8,9] else drawline(False)
+    drawline(True) if digit in [0,2,6,8] else drawline(False)
+    turtle.left(90)
+    drawline(True) if digit in [0,4,5,6,8,9] else drawline(False)
+    drawline(True) if digit in [0,2,3,5,6,7,8,9] else drawline(False)
+    drawline(True) if digit in [0,1,2,3,4,7,8,9] else drawline(False)
+    turtle.left(180)
+    turtle.penup()
+    turtle.fd(20)    #开始下一个数字的绘制
+def drawdata(data):    #获取要绘制的数字
+    turtle.pencolor('purple')
+    for i in data:
+        if i == '-':
+            turtle.write('年',font=('Arial',18,'normal'))
+            turtle.pencolor('green')
+            turtle.fd(40)
+        elif i == '=':
+            turtle.write('月',font=('Arial',18,'normal'))
+            turtle.pencolor('red')
+            turtle.fd(40)
+        elif i == '+':
+            turtle.write('日',font=('Arial',18,'normal'))
+            turtle.pencolor('blue')
+            turtle.fd(40)
+        else:
+            drawdigit(eval(i))
+
+def main():
+    turtle.setup(800,350,200,200)
+    turtle.penup()
+    turtle.fd(-300)
+    turtle.pensize(5)
+    drawdata(time.strftime("%Y-%m=%d+",time.gmtime()))
+    turtle.hideturtle()
+    turtle.done()
+
+main()
