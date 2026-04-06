@@ -358,7 +358,7 @@ plt.show()
 6. height是从中心点向边缘绘制的长度
 7. width是每一个绘图区域的面积（角度），就是一个颜色覆盖的角度
 
-![]()
+![](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E6%9E%81%E5%9D%90%E6%A0%87.png)
 
 
 
