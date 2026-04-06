@@ -371,7 +371,11 @@ ax.set_title('散点图',fontproperties='FangSong',fontsize=25,color='red')
 plt.savefig('散点图.png',dpi=1000)
 plt.show()
 ```
-![]()
+
+1. subplot默认参数是空时默认只有一个绘图区域
+2. fig代表的是整个画布，ax代表的是子图，坐标轴
+![](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E6%95%A3%E7%82%B9%E5%9B%BE.png)
+
 
 
 
