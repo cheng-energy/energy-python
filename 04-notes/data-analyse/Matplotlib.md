@@ -360,9 +360,18 @@ plt.show()
 
 ![](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E6%9E%81%E5%9D%90%E6%A0%87.png)
 
-
-
-
+## 散点图的绘制
+```python
+#使用面向对象的方法
+import numpy as np
+import matplotlib.pyplot as plt
+fig,ax = plt.subplots()
+ax.plot(10*np.random.rand(100),10*np.random.rand(100),"o")
+ax.set_title('散点图',fontproperties='FangSong',fontsize=25,color='red')
+plt.savefig('散点图.png',dpi=1000)
+plt.show()
+```
+![]()
 
 
 
