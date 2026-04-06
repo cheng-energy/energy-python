@@ -332,12 +332,33 @@ plt.show()
 ![](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%BB%83%E4%B9%A0.png)
 
 
+## 极坐标图的绘制
+```python
+#面向对象的方法
+import matplotlib as plt
+import matplotlib.pyplot as plt
+import numpy as np
+N = 20
+theat = np.linspace(0.0,2*np.pi,N,endpoint=False)
+radii = 10*np.random.rand(N)
+width = np.pi/4*np.random.rand(N)
+#重点是下面
+ax = plt.subplot(111,projection='polar')
+bars = ax.bar(theat,radii,width=width,bottom=0.0)
+for r,bar in zip(radii,bars):
+    bar.set_facecolor(plt.cm.viridis(r/10))
+    bar.set_alpha(0.5)
+plt.show()
+```
+1. N是绘制极坐标中数据的个数
+2. linspace是根据起止数据等间距生成数组
+3. plt.subplot那个就是生成一个绘图区域，projection那个部分给出绘制极坐标的指示
+4. ax.bar是对象.方法，三个参数分别对应left，height，width
+5. left表示绘制极坐标系中那些颜色区域时是从哪里开始的
+6. height是从中心点向边缘绘制的长度
+7. width是每一个绘图区域的面积（角度），就是一个颜色覆盖的角度
 
-
-
-
-
-
+![]()
 
 
 
