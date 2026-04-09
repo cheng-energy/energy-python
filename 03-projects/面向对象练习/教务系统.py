@@ -110,7 +110,7 @@ class EduManagement():
                 case "6":
                     print('拜拜')
                     break
-                case "_":
+                case _:
                     print('输入错误，请输入1-6')
 if __name__ == '__main__':
     edu_management = EduManagement()
