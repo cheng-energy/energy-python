@@ -96,22 +96,27 @@ class EduManagement():
             print('|--------------------------------------------------------------|')
             print()
             choice = input('请选择要进行的操作，输入1-6\n')
-            match choice:
-                case "1":
-                    self.add_student()
-                case "2":
-                    self.update_student()
-                case "3":
-                    self.delete_student()
-                case "4":
-                    self.index_student()
-                case "5":
-                    self.index_all()
-                case "6":
-                    print('拜拜')
-                    break
-                case _:
-                    print('输入错误，请输入1-6')
+            try:
+                match choice:
+                    case "1":
+                        self.add_student()
+                    case "2":
+                        self.update_student()
+                    case "3":
+                        self.delete_student()
+                    case "4":
+                        self.index_student()
+                    case "5":
+                        self.index_all()
+                    case "6":
+                        print('拜拜')
+                        break
+                    case _:
+                        print('输入错误，请输入1-6')
+            except ValueError as e:
+                print('输入的数据有错误，请重新输入！！！！！')
+            except Exception as e:
+                print('程序出错，请重新选择')
 if __name__ == '__main__':
     edu_management = EduManagement()
     edu_management.run()
