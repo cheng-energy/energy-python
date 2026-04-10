@@ -112,9 +112,26 @@
 
 
 
+##### Apifox接口测试
+- 下载Apifox操作
+- 需要一个客户端，浏览器就是一个现成的客户端
+- 流式输出就是一个字一个字输出（在调用deep seek过程中会涉及）
+- 非流式输出就是一下子输出
+- curl是一个命令行工具（-H后面的是请求头）
+- nodejs是一种代码
+- json格式，类似于字典（curl{}里面的内容就是请求体），所有的key必须有双引号引起来。值可以是任意类型（对象，数字，字符串，布尔，列表）
+```
+"messages": [
+          {"role": "system", "content": "You are a helpful assistant."},
+          {"role": "user", "content": "Hello!"}
+```
+其中，role system 就是系统提示词，告诉大模型自己，他是什么，他自己的身份和性格是什么样的（人设）
 
+role user 就是这次交互我们发送过去的内容
 
+大模型响应回来之后，role assistant就是大模型响应的，下面的content就是响应的内容
 
+- 发送和响应都会消耗词元（token）
 ### 提示词工程
 
 
