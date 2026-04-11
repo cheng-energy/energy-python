@@ -132,6 +132,39 @@ role user 就是这次交互我们发送过去的内容
 大模型响应回来之后，role assistant就是大模型响应的，下面的content就是响应的内容
 
 - 发送和响应都会消耗词元（token）
+
+- 这样进行对话大模型是没有记忆的（每一次的请求和响应是相互独立的）
+
+**会话历史滚雪球**：第二次发送需要把我们上一次发送的内容和AI大模型回答加入到messages中然后发送
+```
+"messages":[
+    {"role":"system":},
+    {"role":"user":},
+    {"role":"assistent","content":},
+    {"role":"user","content"},
+]
+```
+- 通过上下文AI可以知道我们之前的会话记忆
+
+###### 通过Apifox来调用本地部署的deep seek
+1. 浏览器打开ollama官网，打开Docs（文档），找到API文档----http://localhost:11434/api---这个是ollama的接口  其中Endpoints是功能接口
+2. 自己本地部署的大模型这样调用同样没有记忆功能，需要通过会话滚雪球方式--（响应回的部分还有thinking部分）
+
+##### 基于python代码调用大模型
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### 提示词工程
 
 
