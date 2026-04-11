@@ -151,22 +151,32 @@ role user 就是这次交互我们发送过去的内容
 2. 自己本地部署的大模型这样调用同样没有记忆功能，需要通过会话滚雪球方式--（响应回的部分还有thinking部分）
 
 ##### 基于python代码调用大模型
-- 
+```py
+#调用deep seek
+import os  # 官方提供内置库，用来获取操作系统信息--这里主要获得（获取一个环境变量）deep seek的APIkey
+from openai import OpenAI
+# client是基于OpenAI建立的客户端对象（DEEPSEEK_API_KEY就是环境变量的名字，值就是APIkey的值）--需要先创建一个环境变量
+client = OpenAI(
+    api_key=os.environ.get('DEEPSEEK_API_KEY'),
+    base_url="https://api.deepseek.com")
 
+response = client.chat.completions.create(
+    model="deepseek-chat",
+    messages=[
+        {"role": "system", "content": ""},
+        {"role": "user", "content": ""},
+    ],
+    stream=False
+)
 
-
-
-
-
-
-
-
-
-
+print(response.choices[0].message.content) # 与响应回的格式有关
+```
+###### 配置环境变量
+- 此电脑————>属性（或者设置中找系统）————>高级系统设置————>环境变量————>上面针对当前用户，下面针对所有用户。
 
 
 ### 提示词工程
-
+- prompt：引导大模型进行内容生成的命令（一句话，一个问题等）
 
 
 
