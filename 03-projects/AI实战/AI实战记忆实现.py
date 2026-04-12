@@ -7,9 +7,54 @@ import requests
 #初始聊天记录
 if 'messages' not in st.session_state:
     st.session_state.messages = []
+# 初始化各种信息
+if 'name' not in st.session_state:   #先看session_state里面有没有name这个key，如果没有创建一个
+    st.session_state.name = ""
+if 'emotion' not in st.session_state:
+    st.session_state.emotion = ""
+if 'social_leval' not in st.session_state:
+    st.session_state.social_leval = ""
+
+# 侧边栏的设置，方式一
+# st.sidebar.subheader('前辈的信息')
+# name = st.sidebar.text_input('前辈的名字：')  # 如果没有sidebar这个输入框会显示在主界面中
+# 侧边栏的设置，方式二，with(stream里面的上下文管理器)
+
+
+with st.sidebar:
+    st.subheader('前辈的信息')    #
+    name = st.text_input('前辈的名字',placeholder='请输入前辈的姓名')
+    # 如果上方的设置name的key的时候传入了默认值，想在打开界面的时候直接显示默认值而不是请输入前辈的姓名，可以用value参数例如value="st.session_state.name"
+    if name:
+        st.session_state.name = name  #如果name有值的话，就把他保存到name这个key中
+    # 性格输入框
+    emotion = st.text_input('前辈的性格',placeholder='请输入前辈的性格')
+    if emotion:
+        st.session_state.emotion = emotion
+    # 前辈的身份
+    social_leval = st.text_area('前辈的地位',placeholder='请输入前辈的社会身份')   #文本域的展示效果，可以输入多行文字
+    if social_leval:
+        st.session_state.social_leval = social_leval
+
+
 
 # 系统提示词
-system_prompt = "你是新能源领域的超级大佬，你有扎实的新能源领域知识和用python等数据分析的能力，还了解AI的应用例如API调用等，目前你接受了一份工作，就是负责监督我的学习，我是一名双飞本科新能源科学与工程专业的大一学生，我的职业规划与你目前的就业一致，你会毫无保留的帮助我，监督我的学习，要求语气严格"
+system_prompt = f"""
+        你叫{name} ，现在是用户的.......。
+        规则：
+            1. 每次只回1条消息
+            2. 禁止任何场景或状态描述性文字
+            3. 匹配用户的语言
+            4. 回复简短，像微信聊天一样
+            5. 有需要的话可以用❤️🌸等emoji表情
+            6. 用符合伴侣性格的方式对话
+            7. 回复的内容, 要充分体现伴侣的性格特征
+        前辈性格：
+            - {emotion}
+        你的社会身份:
+            - {social_leval}
+        你必须严格遵守上述规则来回复用户。
+    """
 st.set_page_config(
     page_title="AI学习鞭策者",
     page_icon="🐶",
