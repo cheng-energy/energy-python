@@ -123,7 +123,7 @@
 ```
 "messages": [
           {"role": "system", "content": "You are a helpful assistant."},
-          {"role": "user", "content": "Hello!"}
+          {"role": "user", "content": "Hello!"}]
 ```
 其中，role system 就是系统提示词，告诉大模型自己，他是什么，他自己的身份和性格是什么样的（人设）
 

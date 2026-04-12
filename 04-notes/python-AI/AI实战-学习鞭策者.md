@@ -57,7 +57,9 @@ st.set_page_config(
     }# 菜单的信息，可以是空字典
 )
 ```
-
+# AI学习鞭策者
+## 安装AI插件，lingma
+- alt+p可以获取AI的主动提示
 
 
 
