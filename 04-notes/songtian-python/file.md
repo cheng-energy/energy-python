@@ -108,12 +108,25 @@ with open('','w',endcoding="utf-8") as f
 - json库（标准库）
 - 可以把字典直接保存成json格式
 - python中内容转化为json叫序列化，需要调用
-    - json.dump()
+    - json.dump()进行序列化
 ```py
 import json
+obj = {
+    "name":"CHX",
+    "age" : 18,
+    "gender":"男"
+}
 
+with open('文件路径+文件名.json'，"w",endcoding = 'utf-8') as f
+    json.dump(obj,f,ensure_ascii=False,indent=2)  # indent是缩进的意思每个键值对前面缩进两个空格
+```
+- 还可以使用json.load()进行反序列化
 
-
+```py
+with open('文件路径+文件名.json'，"r",endcoding = 'utf-8') as f# r就是只读模式
+    obj = json.load(f)
+    print(obj)
+```
 
 
 
