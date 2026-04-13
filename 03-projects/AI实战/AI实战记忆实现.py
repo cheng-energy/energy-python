@@ -6,11 +6,19 @@ import requests
 import datetime
 import json
 
+# 生成会话标识
+def generate_session_id():
+    return str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
 
-
-
-
-
+def load_session():
+    session_list = []
+    # 加载sessions目录下的文件
+    if os.path.exists('sessions'):
+        file_list = os.listdir('sessions')
+        for file in file_list:
+            if file.endswith('.json'):
+                session_list.append(file[:-5])
+    return session_list
 
 # 定义保存会话信息的函数
 def save_session():
@@ -43,7 +51,7 @@ if 'social_leval' not in st.session_state:
     st.session_state.social_leval = ""
 #会话的名字
 if 'current_session' not in st.session_state:
-    now = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")  # 获取当前的系统时间
+    now = generate_session_id()  # 获取当前的系统时间
     st.session_state.current_session = now
 
 # 侧边栏的设置，方式一
@@ -59,6 +67,31 @@ with st.sidebar:
     if st.button('新建会话',width="stretch",icon='🫆'):
         save_session()
         #创建新会话并保存
+        if st.session_state.messages is not None:   #如果聊天消息为空,则可以创建新会话
+            st.session_state.messages = []
+            st.session_state.current_session = generate_session_id()
+            save_session()
+            st.rerun ()   #重新运行当前页面
+
+
+
+    st.text('会话历史')
+    session_list = load_session()
+    for session in session_list:
+        col1,col2 = st.columns([4,1])
+        with col1:
+            if st.button(session, width="stretch", icon='😶‍🌫️',key=f"load_{session}"):
+                pass
+
+        with col2:
+            #删除会话信息
+            if st.button("",width="stretch",icon='❌️',key=f"delete_{session}"):
+                pass
+
+
+
+
+
 
 
 
@@ -84,7 +117,7 @@ with st.sidebar:
     if name:
         st.session_state.name = name  #如果name有值的话，就把他保存到name这个key中
     # 性格输入框
-    emotion = st.text_input('前辈的性格',placeholder='请输入前辈的性格')
+    emotion = st.text_area('前辈的性格',placeholder='请输入前辈的性格')
     if emotion:
         st.session_state.emotion = emotion
     # 前辈的身份
@@ -96,15 +129,15 @@ with st.sidebar:
 
 # 系统提示词
 system_prompt = f"""
-        你叫{name} ，现在是用户的.......。
+        你叫{name} ，是我的职场前辈，懂得新能源和AI还有数据分析
         规则：
-            1. 每次只回1条消息
-            2. 禁止任何场景或状态描述性文字
-            3. 匹配用户的语言
-            4. 回复简短，像微信聊天一样
-            5. 有需要的话可以用❤️🌸等emoji表情
-            6. 用符合伴侣性格的方式对话
-            7. 回复的内容, 要充分体现伴侣的性格特征
+            1. 
+            2. 
+            3. 
+            4. 
+            5. 
+            6. 
+            7. 
         前辈性格：
             - {emotion}
         你的社会身份:
@@ -129,8 +162,8 @@ if prompt:#这里的字符串会自动转化为布尔值，如果空字符串则
     st.session_state.messages.append({"role": "user","content": prompt})
 
 # 展示聊天信息
-    for message in st.session_state.messages:
-        st.chat_message(message["role"]).write(message["content"])  #可代替下面四行代码，妙啊，user和assistant都是role
+for message in st.session_state.messages:
+    st.chat_message(message["role"]).write(message["content"])  #可代替下面四行代码，妙啊，user和assistant都是role
         # if message["role"] == "user":
         #     st.chat_message("user").write(message["content"])
         # else:
@@ -160,7 +193,7 @@ if prompt:#这里的字符串会自动转化为布尔值，如果空字符串则
     # 流式输出
     #创建一个空容器,用于展示大模型返回结果
     response_message = st.empty()
-    """1.遍历response"""
+    # 1.遍历response
     full_response = ""
     for chunk in response:
 
