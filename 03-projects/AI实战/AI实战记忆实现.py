@@ -6,6 +6,9 @@ import requests
 import datetime
 import json
 
+from requests import delete
+
+
 # 生成会话标识
 def generate_session_id():
     return str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
@@ -18,7 +21,9 @@ def load_session():
         for file in file_list:
             if file.endswith('.json'):
                 session_list.append(file[:-5])
+    session_list.sort(reverse=True)
     return session_list
+
 
 # 定义保存会话信息的函数
 def save_session():
@@ -37,6 +42,30 @@ def save_session():
         #保存会话数据
         with open(f'sessions/{st.session_state.current_session}.json', 'w',encoding='utf-8') as f:
             json.dump(session_state, f, ensure_ascii=False, indent=2)
+
+# 加载指定的会话信息
+def load_value(session_name):
+    try:
+        if os.path.exists(f'sessions/{session_name}.json'):
+            with open(f'sessions/{session_name}.json', 'r',encoding='utf-8') as f:
+                session_state = json.load(f)
+                st.session_state.name = session_state['name']
+                st.session_state.emotion = session_state['emotion']
+                st.session_state.social_leval = session_state['social_leval']
+                st.session_state.messages = session_state['messages']
+                st.session_state.current_session = session_name
+    except Exception:
+        st.error("加载会话信息失败")
+def delete_session(session_name):
+    try:
+        if os.path.exists(f'sessions/{session_name}.json'):
+            os.remove(f'sessions/{session_name}.json')
+            #如果删除的是当前会话，则清空当前会话
+            if session_name == st.session_state.current_session:
+                st.session_state.messages = []
+                st.session_state.current_session = generate_session_id()
+    except Exception:
+        st.error("删除会话信息失败")
 
 
 #初始聊天记录
@@ -80,36 +109,22 @@ with st.sidebar:
     for session in session_list:
         col1,col2 = st.columns([4,1])
         with col1:
-            if st.button(session, width="stretch", icon='😶‍🌫️',key=f"load_{session}"):
-                pass
+            #三元运算符来判断会话记录选择的是哪个
+            if st.button(session, width="stretch", icon='😶‍🌫️',key=f"load_{session}",type="primary" if session == st.session_state.current_session else "secondary"):
+                # 加载会话信息
+                load_value(session)
+                st.rerun()
 
         with col2:
             #删除会话信息
             if st.button("",width="stretch",icon='❌️',key=f"delete_{session}"):
-                pass
+                delete_session(session)
+                st.rerun()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    #分隔线
+    st.divider()
 
     st.subheader('前辈的信息')  #
     name = st.text_input('前辈的名字', placeholder='请输入前辈的姓名')
@@ -162,6 +177,7 @@ if prompt:#这里的字符串会自动转化为布尔值，如果空字符串则
     st.session_state.messages.append({"role": "user","content": prompt})
 
 # 展示聊天信息
+st.text(f"会话名称：{st.session_state.current_session}")
 for message in st.session_state.messages:
     st.chat_message(message["role"]).write(message["content"])  #可代替下面四行代码，妙啊，user和assistant都是role
         # if message["role"] == "user":
@@ -203,9 +219,10 @@ for message in st.session_state.messages:
             response_message.chat_message("assistant").write(full_response)
             #这个空组件中之间选择assistant来打印，他就不会因为下面的st.打印出一个对话框了
             # st.chat_message("assistant").write(full_response)不可以放在这里，会重复打印，也可以放在外面，否则还是最后等流式输出结束后打印出内容
-        st.session_state.messages.append({"role": " assistant","content": full_response})
+    st.session_state.messages.append({"role": "assistant","content": full_response})
 
-
+    #保存会话信息
+    save_session()
 
 
 
