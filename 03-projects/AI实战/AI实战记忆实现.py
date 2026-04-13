@@ -173,7 +173,6 @@ st.logo("D:\\剪辑素材\\动漫图片\\小猫.jpg")
 # 设置输入框
 prompt = st.chat_input("请输入你的问题")
 if prompt:#这里的字符串会自动转化为布尔值，如果空字符串则为False
-    st.chat_message("user").write(f"{prompt}")
     st.session_state.messages.append({"role": "user","content": prompt})
 
 # 展示聊天信息
@@ -185,43 +184,30 @@ for message in st.session_state.messages:
         # else:
         #     st.chat_message("assistant").write(message["content"])
 
-
-
-    # 调用大模型
+if prompt:
     client = OpenAI(
         api_key=os.environ.get('DEEPSEEK_API_KEY'),
         base_url="https://api.deepseek.com")
 
-    # noinspection PyTypeChecker
     response = client.chat.completions.create(
         model="deepseek-chat",
         messages=[
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": prompt},
-            *st.session_state.messages   #解包列表
+            *st.session_state.messages
         ],
         stream=True
     )
     print('---------------大模型返回的结果-----------------')
-    # st.chat_message("assistant").write(response.choices[0].message.content)
-    # st.session_state.messages.append({"role": " assistant","content": response.choices[0].message.content})   #非流式输出的打印结果
 
-    # 流式输出
-    #创建一个空容器,用于展示大模型返回结果
     response_message = st.empty()
-    # 1.遍历response
     full_response = ""
     for chunk in response:
-
         if chunk.choices[0].delta.content is not None:
             content = chunk.choices[0].delta.content
             full_response += content
             response_message.chat_message("assistant").write(full_response)
-            #这个空组件中之间选择assistant来打印，他就不会因为下面的st.打印出一个对话框了
-            # st.chat_message("assistant").write(full_response)不可以放在这里，会重复打印，也可以放在外面，否则还是最后等流式输出结束后打印出内容
-    st.session_state.messages.append({"role": "assistant","content": full_response})
 
-    #保存会话信息
+    st.session_state.messages.append({"role": "assistant", "content": full_response})
     save_session()
 
 
