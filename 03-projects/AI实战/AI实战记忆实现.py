@@ -3,27 +3,83 @@ import streamlit as st
 from openai import OpenAI
 import os
 import requests
+import datetime
+import json
+
+
+
+
+
+
+
+# 定义保存会话信息的函数
+def save_session():
+        # 保存当前会话信息
+        if st.session_state.current_session:
+            # 构建新的会话对象
+            session_state = {
+                "name": st.session_state.name,
+                "emotion": st.session_state.emotion,
+                "social_leval": st.session_state.social_leval,
+                "messages": st.session_state.messages
+            }
+        #如果sessions目录不存在就创建
+        if not os.path.exists('sessions'):
+            os.mkdir('sessions')
+        #保存会话数据
+        with open(f'sessions/{st.session_state.current_session}.json', 'w',encoding='utf-8') as f:
+            json.dump(session_state, f, ensure_ascii=False, indent=2)
+
 
 #初始聊天记录
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 # 初始化各种信息
 if 'name' not in st.session_state:   #先看session_state里面有没有name这个key，如果没有创建一个
-    st.session_state.name = ""
+    st.session_state.name = ""         #session_state中的数据在多次会话中是可以共享的
 if 'emotion' not in st.session_state:
     st.session_state.emotion = ""
 if 'social_leval' not in st.session_state:
     st.session_state.social_leval = ""
+#会话的名字
+if 'current_session' not in st.session_state:
+    now = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")  # 获取当前的系统时间
+    st.session_state.current_session = now
 
 # 侧边栏的设置，方式一
 # st.sidebar.subheader('前辈的信息')
 # name = st.sidebar.text_input('前辈的名字：')  # 如果没有sidebar这个输入框会显示在主界面中
 # 侧边栏的设置，方式二，with(stream里面的上下文管理器)
 
-
 with st.sidebar:
-    st.subheader('前辈的信息')    #
-    name = st.text_input('前辈的名字',placeholder='请输入前辈的姓名')
+
+    #增加会话管理面板
+    st.subheader('AI控制面板')
+    #增一个新增会话的按钮
+    if st.button('新建会话',width="stretch",icon='🫆'):
+        save_session()
+        #创建新会话并保存
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    st.subheader('前辈的信息')  #
+    name = st.text_input('前辈的名字', placeholder='请输入前辈的姓名')
     # 如果上方的设置name的key的时候传入了默认值，想在打开界面的时候直接显示默认值而不是请输入前辈的姓名，可以用value参数例如value="st.session_state.name"
     if name:
         st.session_state.name = name  #如果name有值的话，就把他保存到name这个key中
