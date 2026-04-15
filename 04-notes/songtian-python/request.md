@@ -156,6 +156,17 @@ res2 = s.get(url2)
 ```
 
 
+## 发送带请求头的请求
+- rewuests.get(url,headers = 请求头)
+- 就是把自己伪装成浏览器获取更多的信息。
+- 请求头是需要去浏览器网页寻找的----user-agent
+  1. 右键检查源代码或者右键检查
+  2. 点击net work
+  3. 勾选 preserve log ---勾选后刷新页面请求不会被刷新
+  4. 刷新页面
+  5. 查看Name一栏下和请求的url地址相同的response-注意确定右侧Headers的request method是GET，这样才能对应
+- Edg找不到请求头可以用谷歌试试
+
 
 
 
