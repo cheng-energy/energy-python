@@ -182,7 +182,27 @@ print(response.url)
 # print(response.content.decode())
 ```
 
+## 在heraders设置cookie
+- 无痕窗口就是不携带任何cookie
+- 带上cookie之后就可以访问那种登录才能看的页面
 
+## cookies参数的使用
+- 除了使用herders传参，还可以设置专门的cookie
+- 形式：字典
+- 把cookie字符串转化成cookies需要的字典：字典推导式
+```py
+temp = 'BIDUPSID=8177B582465E5754C27B5CEB1B7C75E4; PSTM=1776215472; BAIDUID=8177B582465E5754C8FB8BC257F0B4AB:FG=1; BD_HOME=1; BAIDUID_BFESS=8177B582465E5754C8FB8BC257F0B4AB:FG=1; BD_UPN=12314753; BA_HECTOR=ag01a180al0g240421a4al2k2021a61kttpdh27; ZFY=gIqYlyJ6l1d4KaeOo1JKcsgKM:AD4e76YkHNvVNEmrHY:C; H_PS_PSSID=63145_67862_68166_68225_68267_68297_68378_68419_68454_68543_68553_68623_68614_68669_68738_68724_68775_68799_68874_68878_68906_68835_68928_68996_69006_69010_69020_69013_69024_69066_69073_69037_69084_69187_69168_69198_69208_69226_69244_69241_69231_69235_69246; BDRCVFR[t8qxwL5sMGc]=mk3SLVN4HKm; delPer=0; BD_CK_SAM=1; PSINO=5; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; H_PS_645EC=afa1MbyhuJgUqBX0U0vMBzOrO%2BWhNyarTrsCAoDswJq1d%2FunQWokSSDyDI4; baikeVisitId=299b8fc7-5de8-4b97-96c1-bd572ccf1b17; COOKIE_SESSION=17_0_0_2_0_0_1_0_0_0_0_0_0_0_0_0_0_0_1776216430%7C2%230_0_1776216430%7C1; Hm_lvt_aec699bb6442ba076c8981c6dc490771=1776217279; Hm_lpvt_aec699bb6442ba076c8981c6dc490771=1776217279; HMACCOUNT=1D7F4D1BB4284090'
+#稳妥的方法
+cookies = temp.split('; ')
+cookie_dict = {}
+for cookie in cookies:
+    cookie_dict[cookie.split('=')[0]] = cookie.split('=')[-1]
+# print(cookie_dict)
+#字典推到式
+# 展示自己的时候使用，平时还是用for循环就好
+response = requests.get(url,headers=headers,params=params,cookies=cookie_dict)
+print(response.headers)
+```
 
 
 
