@@ -167,6 +167,20 @@ res2 = s.get(url2)
   5. 查看Name一栏下和请求的url地址相同的response-注意确定右侧Headers的request method是GET，这样才能对应
 - Edg找不到请求头可以用谷歌试试
 
+## 发送带参数的请求
+1. 直接url中携带参数
+  - https://www.baidu.com/s?wd=python   这个wd就是搜索框
+2. 发送请求时带上参数字典，参数字典设置给params
+```py
+url = 'https://www.baidu.com'
+headers = { "user-agent" : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36'}
+params = {
+    'wd':'python'
+}
+response = requests.get(url,headers=headers,params=params)
+print(response.url)
+# print(response.content.decode())
+```
 
 
 
