@@ -206,6 +206,21 @@ print(response.headers)
 
 
 
+## cookiejar对象的处理-转换成字典
+```py
+cookies_dict = requests.utils.dict_from_cookiejar(cookiejar类型的对象)
+```
+- 一般不用这个
+## 超时参数tmeout的使用
+- 如果一个请求由于网络波动等问题，很长时间没有请求成功，那么爬虫效率就会下降，使用timeout来设置一个时间，在这个时间内没有返回就会报错
+response = requests.get(url,timeout=3)
+
+
+
+
+
+
+
 
 
 
