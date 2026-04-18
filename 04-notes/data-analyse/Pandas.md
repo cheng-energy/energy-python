@@ -21,14 +21,12 @@ df.to_csv('D:/python/CODE/ST/数据存放/电影数据1')
 
 
 
-## 数据的读取与写入
-- 官网：https://pandas.pydata.org
-### DateFrame
-- 创建方法多样
+## 数据的查询，选择与过滤
+
+![数据查看1](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E6%95%B0%E6%8D%AE%E6%9F%A5%E7%9C%8B.png)
 
 
-
-
+![数据查看2](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A22.png)
 
 
 
