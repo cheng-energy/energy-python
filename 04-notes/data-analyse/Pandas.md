@@ -28,7 +28,7 @@ df.to_csv('D:/python/CODE/ST/数据存放/电影数据1')
 
 ![数据查看2](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A22.png)
 
-
+![数据过滤](https://raw.githubusercontent.com/cheng-energy/energy-python/refs/heads/main/images/%E6%95%B0%E6%8D%AE%E8%BF%87%E6%BB%A4.png)
 
 
 
