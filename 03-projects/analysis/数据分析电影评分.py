@@ -60,6 +60,6 @@ bin = movies_data.groupby('评分')['评分'].count()
 plt.subplot(2,2,4)
 plt.pie(bin.values, autopct='%1.1f%%',shadow=False,startangle=90,colors=['red', 'blue', 'green', 'orange', 'purple'])
 plt.title('电影不同评分比例',fontsize=15)
-plt.savefig('D:\\浏览器下载\\超级图片')
+plt.savefig('D:/python/energy-python/images',dpi=1000)
 plt.show()
 
