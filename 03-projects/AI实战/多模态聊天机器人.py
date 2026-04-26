@@ -3,9 +3,8 @@ import os
 from mem0 import Memory
 import ollama
 from openai import OpenAI
-
-
-
+from pyexpat.errors import messages
+from sqlalchemy.sql.functions import user
 
 """-----------------基于openai来调用本地部署的模型-----------------------"""
 # client = OpenAI(
@@ -28,40 +27,115 @@ from openai import OpenAI
 缺点：deep seek的思考部分无法体现，用户等待时间长体验差
 """
 
+# 创建向量数据库
+# 这个环境变量对于 embedder 的初始化是必要的，即便用的是 Ollama
+os.environ["OPENAI_API_KEY"] = "ollama"
+
+config = {
+    # 1. 向量存储：记忆中提取的信息放在哪里
+    "vector_store": {
+        "provider": "chroma",
+        "config": {
+            "path":"D:\\CODE\\本地部署",
+        }
+    },
+
+    # 2. ⭐ 大语言模型 (LLM)：谁来理解和记忆对话
+    "llm": {
+        "provider": "ollama",
+        "config": {
+            "model": "my:latest",               # 你熟悉的模型名
+            "temperature": 0.1,                 # 数值越低，输出越稳定、可预测
+            "max_tokens": 2000,
+        }
+    },
+
+    # 3. ⭐ 嵌入模型 (Embedder)：谁来把文字变成向量，以便搜索记忆
+    "embedder": {
+        "provider": "ollama",
+        "config": {
+            "model": "nomic-embed-text",        # 专门做嵌入的模型
+            "embedding_dims": 768,              # 模型输出的向量维度，需与模型匹配
+        }
+    },
+}
+
+# 创建记忆实例
+m = Memory.from_config(config)
 
 
 
+# 下面是使用ollama进行流式输出
 
 # 发起流式对话请求
-stream = ollama.chat(
-    model='my:latest',  # 替换成你的本地模型名，如 'deepseek-r1:8b'
-    messages=[{"role": "user", "content": "你是谁啊，你会什么呢"}],
-    stream=True
-)
+print('请输入小写的q来开始和鑫君的聊天，或者输入exit结束和鑫君的聊天')
+user_think = input('是否开始对话？(输入 q 开始，输入exit退出): ')
+if user_think != 'q':
+    exit(0)
 
-print("> ", end="")
-# 迭代处理每一个数据块
-n = 0
-m = 0
-for chunk in stream:
-    # 获取助手回复的主要文本内容
-    content = chunk['message']['content']
-    if content:
-        m += 1
-        if m == 1:
-            print(f'\n[回答]\n{content}', end='', flush=True,)  # 实时打印，不换行
-        if n > 1:
-            print(content,flush=True,end='')
+while True:
+    user1 = input('请输入你要说的话：')
+    if user1.lower() in ['quit', 'exit', '拜拜']:
+        print("退出聊天")
+        break
+    relevant_memories = m.search(user1, user_id="cheng",limit=10)
+
+    # 2. 构造消息列表（把记忆作为 system 提示）
+    messages = []
+    if relevant_memories:
+        mem_texts = [mem['memory'] for mem in relevant_memories]
+        context = "关于用户的历史记忆：\n" + "\n".join(mem_texts)
+        messages.append({"role": "system", "content": context})
+    messages.append({"role": "user", "content": user1})
 
 
-    if 'thinking' in chunk['message']:
-        thinking = chunk['message']['thinking']
-        if thinking:
-            n += 1
-            if n <= 1:
-                print(f"\n[思考]\n {thinking}", end='')
-            else:
-                print(thinking,end='')
+    stream = ollama.chat(
+        model='my:latest',  # 替换成你的本地模型名，如 'deepseek-r1:8b'
+        messages=messages,
+        stream=True
+    )
+
+    print("> ", end="")
+    # 迭代处理每一个数据块
+    n = 0
+    b = 0
+    e = 0
+    full_think = ''
+    full_content = ''
+    full_answer = ''
+    for chunk in stream:
+        # 获取鑫君回复的主要文本内容
+        content = chunk['message']['content']
+        if content:
+            b += 1
+            if b == 1:
+                print(f'\n[回答]\n{content}', end='', flush=True,)  # 实时打印，不换行
+
+            if b > 1:
+                print(content,flush=True,end='')
+            full_content += content
+
+        if 'thinking' in chunk['message']:
+            thinking = chunk['message']['thinking']
+            if thinking:
+                n += 1
+                if n == 1:
+                    print(f"\n[思考]\n {thinking}", end='')
+                if n >1:
+                    print(thinking,end='')
+                full_think += thinking
+
+    full_answer = full_think + full_content
+
+
+
+    messages1 = [
+        {"role": "user", "content": user1},
+        {"role":"assistant","content":full_answer}
+
+    ]
+    m.add(messages1,user_id='cheng')
+
 
 
 
