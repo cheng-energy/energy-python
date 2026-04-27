@@ -36,7 +36,7 @@ config = {
     "vector_store": {
         "provider": "chroma",
         "config": {
-            "path":"D:\\CODE\\本地部署",
+            "path":"D:\\code\\本地部署1",
         }
     },
 
@@ -78,16 +78,17 @@ while True:
     if user1.lower() in ['quit', 'exit', '拜拜']:
         print("退出聊天")
         break
-    relevant_memories = m.search(user1, user_id="cheng",limit=10)
+    # 1. 检索记忆（注意新版 API 用法）
+    search_result = m.search(user1, filters={"user_id": "cheng"})
+    memories = search_result.get("results", [])
 
-    # 2. 构造消息列表（把记忆作为 system 提示）
-    messages = []
-    if relevant_memories:
-        mem_texts = [mem['memory'] for mem in relevant_memories]
+        # 2. 构造消息（将记忆作为 user 上下文，避免 system 角色可能被忽略）
+    if memories:
+        mem_texts = [mem['memory'] for mem in memories]
         context = "关于用户的历史记忆：\n" + "\n".join(mem_texts)
-        messages.append({"role": "system", "content": context})
-    messages.append({"role": "user", "content": user1})
-
+        messages = [{"role": "user", "content": context + "\n\n现在用户问：" + user1}]
+    else:
+        messages = [{"role": "user", "content": user1}]
 
     stream = ollama.chat(
         model='my:latest',  # 替换成你的本地模型名，如 'deepseek-r1:8b'
@@ -99,7 +100,6 @@ while True:
     # 迭代处理每一个数据块
     n = 0
     b = 0
-    e = 0
     full_think = ''
     full_content = ''
     full_answer = ''
@@ -109,7 +109,7 @@ while True:
         if content:
             b += 1
             if b == 1:
-                print(f'\n[回答]\n{content}', end='', flush=True,)  # 实时打印，不换行
+                print(f'\n[回答]\n{content}', end='', flush=True)  # 实时打印，不换行
 
             if b > 1:
                 print(content,flush=True,end='')
